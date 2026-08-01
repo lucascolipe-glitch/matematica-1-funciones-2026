@@ -161,9 +161,9 @@ function actualizarCuadratica(){
   const h=+document.getElementById('cuad-h').value,k=+document.getElementById('cuad-k').value;
   document.getElementById('cuad-a-valor').textContent=numero(a);document.getElementById('cuad-h-valor').textContent=numero(h);document.getElementById('cuad-k-valor').textContent=numero(k);
   const rad=-k/a, roots=rad>=0?[h-Math.sqrt(rad),h+Math.sqrt(rad)]:[];
-  const prop=document.getElementById('cuad-propiedades'); prop.innerHTML=`<p><strong>Función:</strong> \\(f(x)=${numero(a)}(x-${numero(h)})^2${k>=0?'+':''}${numero(k)}\\)</p><p><strong>Vértice:</strong> \((${numero(h)},${numero(k)})\)</p><p><strong>Imagen:</strong> ${a>0?`[${numero(k)},+∞)`:`(−∞,${numero(k)}]`}</p><p><strong>Raíces:</strong> ${roots.length?roots.map(x=>numero(x)).join(' y '):'no tiene raíces reales'}</p>`;
+  const prop=document.getElementById('cuad-propiedades'); prop.innerHTML=`<p><strong>Función:</strong> \\(f(x)=${numero(a)}(x-${numero(h)})^2${k>=0?'+':''}${numero(k)}\\)</p><p><strong>Vértice:</strong> \\((${numero(h)},${numero(k)})\\)</p><p><strong>Imagen:</strong> ${a>0?`[${numero(k)},+∞)`:`(−∞,${numero(k)}]`}</p><p><strong>Raíces:</strong> ${roots.length?roots.map(x=>numero(x)).join(' y '):'no tiene raíces reales'}</p>`;
   const pts=[{x:h,y:k,label:'V'},...roots.map(x=>({x,y:0}))]; document.getElementById('cuad-grafico').innerHTML=graphSvg({xmin:-7,xmax:7,ymin:-9,ymax:9,curves:[{fn:x=>a*(x-h)**2+k}],points:pts,label:'Explorador de parábola'}); typeset(prop);
-}>
+}
 
 function actualizarExponencial(){
   let a=+document.getElementById('exp-a').value;if(Math.abs(a)<.01){a=.5;document.getElementById('exp-a').value=.5;}
@@ -178,7 +178,7 @@ function actualizarPotencia(){
   const n=+document.getElementById('pot-n').value;let a=+document.getElementById('pot-a').value;if(Math.abs(a)<.01){a=.25;document.getElementById('pot-a').value=.25;}const h=+document.getElementById('pot-h').value,k=+document.getElementById('pot-k').value;
   ['a','h','k'].forEach(z=>document.getElementById(`pot-${z}-valor`).textContent=numero({a,h,k}[z]));
   const even=n%2===0, behavior=even?(a>0?'decrece antes de h y crece después':'crece antes de h y decrece después'):(a>0?'creciente en ℝ':'decreciente en ℝ');
-  const prop=document.getElementById('pot-propiedades');prop.innerHTML=`<p><strong>Función:</strong> \(f(x)=${numero(a)}(x-${numero(h)})^{${n}}${k>=0?'+':''}${numero(k)}\)</p><p><strong>Punto de desplazamiento:</strong> \((${numero(h)},${numero(k)})\)</p><p><strong>Tipo:</strong> exponente ${even?'par':'impar'}</p><p><strong>Comportamiento:</strong> ${behavior}</p>`;
+  const prop=document.getElementById('pot-propiedades');prop.innerHTML=`<p><strong>Función:</strong> \\(f(x)=${numero(a)}(x-${numero(h)})^{${n}}${k>=0?'+':''}${numero(k)}\\)</p><p><strong>Punto de desplazamiento:</strong> \\((${numero(h)},${numero(k)})\\)</p><p><strong>Tipo:</strong> exponente ${even?'par':'impar'}</p><p><strong>Comportamiento:</strong> ${behavior}</p>`;
   document.getElementById('pot-grafico').innerHTML=graphSvg({xmin:-6,xmax:6,ymin:-9,ymax:9,curves:[{fn:x=>a*(x-h)**n+k}],points:[{x:h,y:k,label:even?'V':'I'}],label:'Potencia desplazada'});typeset(prop);
 }
 
@@ -189,10 +189,10 @@ function actualizarPartes(){
 }
 function evaluarPartes(){
   const x=+document.getElementById('partes-x').value; let y,regla;
-  if(x<1){y=2**x-5;regla='\(2^x-5\), porque \(x<1\)';}
-  else if(x>=2&&x<=3){y=-x+2;regla='\(-x+2\), porque \(2\le x\le3\)';}
-  else if(x>=4){y=(x-6)**2-2;regla='\((x-6)^2-2\), porque \(x\ge4\)';}
-  const r=document.getElementById('partes-resultado'); r.innerHTML=y===undefined?`<p><strong>No está definida.</strong> ${numero(x)} no pertenece al dominio.</p>`:`<p><strong>Regla:</strong> ${regla}</p><p><strong>Resultado:</strong> \(f(${numero(x)})=${numero(y)}\)</p>`; typeset(r);
+  if(x<1){y=2**x-5;regla='\\(2^x-5\\), porque \\(x\\lt 1\\)';}
+  else if(x>=2&&x<=3){y=-x+2;regla='\\(-x+2\\), porque \\(2\\le x\\le 3\\)';}
+  else if(x>=4){y=(x-6)**2-2;regla='\\((x-6)^2-2\\), porque \\(x\\ge 4\\)';}
+  const r=document.getElementById('partes-resultado'); r.innerHTML=y===undefined?`<p><strong>No está definida.</strong> ${numero(x)} no pertenece al dominio.</p>`:`<p><strong>Regla:</strong> ${regla}</p><p><strong>Resultado:</strong> \\(f(${numero(x)})=${numero(y)}\\)</p>`; typeset(r);
 }
 
 function actualizarInversa(){
