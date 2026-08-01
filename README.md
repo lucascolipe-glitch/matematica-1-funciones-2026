@@ -59,3 +59,9 @@ matematica-1-funciones-2026/
 ```
 
 Las fórmulas se renderizan con MathJax desde CDN. Los videos se cargan solo cuando el estudiante elige reproducirlos; al cambiar de sección se detienen.
+
+
+## Ajustes de interfaz
+
+- Las actividades de opción múltiple usan tarjetas seleccionables compatibles con MathJax, mouse y teclado.
+- La tarjeta verde «Cómo estudiar» forma parte del bloque lateral y queda siempre debajo del índice, sin superponerse.
