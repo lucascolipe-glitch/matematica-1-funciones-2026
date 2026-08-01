@@ -170,7 +170,7 @@ function actualizarExponencial(){
   const b=+document.getElementById('exp-b').value,h=+document.getElementById('exp-h').value,c=+document.getElementById('exp-c').value;
   ['a','h','c'].forEach(z=>document.getElementById(`exp-${z}-valor`).textContent=numero({a,h,c}[z]));
   const grows=(a>0&&b>1)||(a<0&&b<1), ratio=-c/a, root=ratio>0?h+Math.log(ratio)/Math.log(b):null;
-  const prop=document.getElementById('exp-propiedades');prop.innerHTML=`<p><strong>Función:</strong> \(f(x)=${numero(a)}\cdot${numero(b)}^{x-${numero(h)}}${c>=0?'+':''}${numero(c)}\)</p><p><strong>Asíntota:</strong> \(y=${numero(c)}\)</p><p><strong>Imagen:</strong> ${a>0?`(${numero(c)},+∞)`:`(−∞,${numero(c)})`}</p><p><strong>Comportamiento:</strong> ${grows?'creciente':'decreciente'}</p><p><strong>Raíz:</strong> ${root===null?'no tiene':numero(root)}</p>`;
+  const prop=document.getElementById('exp-propiedades');prop.innerHTML=`<p><strong>Función:</strong> \\(f(x)=${numero(a)}\\cdot${numero(b)}^{x-${numero(h)}}${c>=0?'+':''}${numero(c)}\\)</p><p><strong>Asíntota:</strong> \(y=${numero(c)}\)</p><p><strong>Imagen:</strong> ${a>0?`(${numero(c)},+∞)`:`(−∞,${numero(c)})`}</p><p><strong>Comportamiento:</strong> ${grows?'creciente':'decreciente'}</p><p><strong>Raíz:</strong> ${root===null?'no tiene':numero(root)}</p>`;
   const pts=[];if(root!==null&&root>-7&&root<7)pts.push({x:root,y:0,label:'raíz'});document.getElementById('exp-grafico').innerHTML=graphSvg({xmin:-7,xmax:7,ymin:-9,ymax:11,curves:[{fn:x=>a*b**(x-h)+c}],points:pts,lines:[{type:'horizontal',value:c}],label:'Explorador exponencial'});typeset(prop);
 }
 
