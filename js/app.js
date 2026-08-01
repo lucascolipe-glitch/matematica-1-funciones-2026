@@ -151,7 +151,7 @@ function actualizarLineal(){
   const a=+document.getElementById('lineal-a').value,b=+document.getElementById('lineal-b').value;
   document.getElementById('lineal-a-valor').textContent=numero(a); document.getElementById('lineal-b-valor').textContent=numero(b);
   const root=Math.abs(a)>1e-10?-b/a:null, prop=document.getElementById('lineal-propiedades');
-  prop.innerHTML=`<p><strong>Función:</strong> \(f(x)=${numero(a)}x${b>=0?'+':''}${numero(b)}\)</p><p><strong>Comportamiento:</strong> ${a>0?'creciente':a<0?'decreciente':'constante'}</p><p><strong>Ordenada:</strong> \((0,${numero(b)})\)</p><p><strong>Raíz:</strong> ${root===null?(b===0?'todos los reales':'no tiene'):numero(root)}</p>`;
+  prop.innerHTML=`<p><strong>Función:</strong> \\(f(x)=${numero(a)}x${b>=0?'+':''}${numero(b)}\\)</p><p><strong>Comportamiento:</strong> ${a>0?'creciente':a<0?'decreciente':'constante'}</p><p><strong>Ordenada:</strong> \\(${numero(b)}\\)</p><p><strong>Raíz:</strong> ${root===null?(b===0?'todos los reales':'no tiene'):numero(root)}</p>`;
   const pts=[{x:0,y:b,label:'b'}]; if(root!==null&&root>=-8&&root<=8) pts.push({x:root,y:0,label:'raíz'});
   document.getElementById('lineal-grafico').innerHTML=graphSvg({xmin:-8,xmax:8,ymin:-8,ymax:8,curves:[{fn:x=>a*x+b}],points:pts,label:'Explorador de función lineal'}); typeset(prop);
 }
@@ -161,16 +161,16 @@ function actualizarCuadratica(){
   const h=+document.getElementById('cuad-h').value,k=+document.getElementById('cuad-k').value;
   document.getElementById('cuad-a-valor').textContent=numero(a);document.getElementById('cuad-h-valor').textContent=numero(h);document.getElementById('cuad-k-valor').textContent=numero(k);
   const rad=-k/a, roots=rad>=0?[h-Math.sqrt(rad),h+Math.sqrt(rad)]:[];
-  const prop=document.getElementById('cuad-propiedades'); prop.innerHTML=`<p><strong>Función:</strong> \(f(x)=${numero(a)}(x-${numero(h)})^2${k>=0?'+':''}${numero(k)}\)</p><p><strong>Vértice:</strong> \((${numero(h)},${numero(k)})\)</p><p><strong>Imagen:</strong> ${a>0?`[${numero(k)},+∞)`:`(−∞,${numero(k)}]`}</p><p><strong>Raíces:</strong> ${roots.length?roots.map(x=>numero(x)).join(' y '):'no tiene raíces reales'}</p>`;
+  const prop=document.getElementById('cuad-propiedades'); prop.innerHTML=`<p><strong>Función:</strong> \\(f(x)=${numero(a)}(x-${numero(h)})^2${k>=0?'+':''}${numero(k)}\\)</p><p><strong>Vértice:</strong> \((${numero(h)},${numero(k)})\)</p><p><strong>Imagen:</strong> ${a>0?`[${numero(k)},+∞)`:`(−∞,${numero(k)}]`}</p><p><strong>Raíces:</strong> ${roots.length?roots.map(x=>numero(x)).join(' y '):'no tiene raíces reales'}</p>`;
   const pts=[{x:h,y:k,label:'V'},...roots.map(x=>({x,y:0}))]; document.getElementById('cuad-grafico').innerHTML=graphSvg({xmin:-7,xmax:7,ymin:-9,ymax:9,curves:[{fn:x=>a*(x-h)**2+k}],points:pts,label:'Explorador de parábola'}); typeset(prop);
-}
+}>
 
 function actualizarExponencial(){
   let a=+document.getElementById('exp-a').value;if(Math.abs(a)<.01){a=.5;document.getElementById('exp-a').value=.5;}
   const b=+document.getElementById('exp-b').value,h=+document.getElementById('exp-h').value,c=+document.getElementById('exp-c').value;
   ['a','h','c'].forEach(z=>document.getElementById(`exp-${z}-valor`).textContent=numero({a,h,c}[z]));
   const grows=(a>0&&b>1)||(a<0&&b<1), ratio=-c/a, root=ratio>0?h+Math.log(ratio)/Math.log(b):null;
-  const prop=document.getElementById('exp-propiedades');prop.innerHTML=`<p><strong>Función:</strong> \\(f(x)=${numero(a)}\\cdot${numero(b)}^{x-${numero(h)}}${c>=0?'+':''}${numero(c)}\\)</p><p><strong>Asíntota:</strong> \(y=${numero(c)}\)</p><p><strong>Imagen:</strong> ${a>0?`(${numero(c)},+∞)`:`(−∞,${numero(c)})`}</p><p><strong>Comportamiento:</strong> ${grows?'creciente':'decreciente'}</p><p><strong>Raíz:</strong> ${root===null?'no tiene':numero(root)}</p>`;
+  const prop=document.getElementById('exp-propiedades');prop.innerHTML=`<p><strong>Función:</strong> \\(f(x)=${numero(a)}\\cdot${numero(b)}^{x-${numero(h)}}${c>=0?'+':''}${numero(c)}\\)</p><p><strong>Asíntota:</strong> \\(y=${numero(c)}\\)</p><p><strong>Imagen:</strong> ${a>0?`(${numero(c)},+∞)`:`(−∞,${numero(c)})`}</p><p><strong>Comportamiento:</strong> ${grows?'creciente':'decreciente'}</p><p><strong>Raíz:</strong> ${root===null?'no tiene':numero(root)}</p>`;
   const pts=[];if(root!==null&&root>-7&&root<7)pts.push({x:root,y:0,label:'raíz'});document.getElementById('exp-grafico').innerHTML=graphSvg({xmin:-7,xmax:7,ymin:-9,ymax:11,curves:[{fn:x=>a*b**(x-h)+c}],points:pts,lines:[{type:'horizontal',value:c}],label:'Explorador exponencial'});typeset(prop);
 }
 
