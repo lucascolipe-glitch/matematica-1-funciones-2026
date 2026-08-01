@@ -760,3 +760,17 @@ footer p { margin: 4px; }
   .balde-visual { display: none !important; }
   .definicion-funcion { grid-template-columns: 1fr; }
 }
+
+.flechas-funcion {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.flechas-funcion > path {
+  fill: none;
+  stroke: #1f4e8c;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
